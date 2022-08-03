@@ -11,12 +11,14 @@ public class HashTable {
 	{
 		arr = new Dollar[10];
 		count = 0;
+		collisions = 0;
 	}
 	
 	public HashTable(int size)
 	{
 		arr = new Dollar[size];
 		count = 0;
+		collisions = 0;
 	}
 	
 	public int hashSearch (Dollar key) throws Exception
