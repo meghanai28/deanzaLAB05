@@ -4,7 +4,8 @@ public class HashTable {
 	private final double MAX_LOAD_RATE = 0.80;
 	private int count;
 	private Dollar[] arr;
-	// implement collision counter
+	private int collisions;
+	
 
 	public HashTable()
 	{
@@ -41,7 +42,7 @@ public class HashTable {
 	{
 		int keyIndex = hashFunction(key,arr.length);
 		int val = keyIndex;
-		int i =0;
+		int i =1;
 		if(getLoadFactor()>MAX_LOAD_RATE)
 		{
 			resize();
@@ -50,6 +51,7 @@ public class HashTable {
 		{
 			keyIndex = val;
 			keyIndex = (keyIndex + i +i*i)%arr.length;
+			collisions++;
 			i++;
 		}
 		
@@ -78,6 +80,7 @@ public class HashTable {
 	public void resize()
 	{
 		count =0;
+		collisions = 0;
 		Dollar [] temp = arr;
 		arr = new Dollar[nextPrime(arr.length *2)];
 		
