@@ -8,6 +8,25 @@ public class HashTable {
 		//table.hashArray(arr, new Dollar(2));
 	}
 	
+	public int hashSearch(Dollar [] arr, Dollar key) throws Exception
+	{
+		int keyIndex = hashFunction(key);
+		int i =0;
+		
+		while(arr[keyIndex]!= null)
+		{
+			if(arr[keyIndex].isEqual(key))
+			{
+				return keyIndex;
+			}
+			keyIndex = (keyIndex + i +i*i)%arr.length;
+			i++;
+		}
+		
+		return -1;
+		
+	}
+	
 	public void hashArray(Dollar [] arr, Dollar key)
 	{
 		int keyIndex = hashFunction(key);
@@ -16,6 +35,7 @@ public class HashTable {
 		while(arr[keyIndex]!= null)
 		{
 			keyIndex = (keyIndex + i +i*i)%arr.length;
+			i++;
 		}
 		
 		arr[keyIndex] = key;
