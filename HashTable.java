@@ -4,7 +4,7 @@ public class HashTable {
 	private final double MAX_LOAD_RATE = 0.80;
 	private int count;
 	private Dollar[] arr;
-	
+	// implement collision counter
 
 	public HashTable()
 	{
