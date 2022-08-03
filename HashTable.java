@@ -5,7 +5,12 @@ public class HashTable {
 	{
 		Dollar [] arr = new Dollar[29];
 		HashTable table = new HashTable();
-		//table.hashArray(arr, new Dollar(2));
+		table.hashArray(arr, new Dollar(2));
+		table.hashArray(arr, new Dollar(15.01));
+		int val1 = table.hashSearch(arr, new Dollar(15.01));
+		int val2 = table.hashSearch(arr, new Dollar(2));
+		 System.out.println(val1);
+		 System.out.println(val2);
 	}
 	
 	public int hashSearch(Dollar [] arr, Dollar key) throws Exception
