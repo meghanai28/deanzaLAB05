@@ -1,21 +1,26 @@
 
 public class HashTable {
 
-	public static void main (String[] args) throws Exception
+	private final double MAX_LOAD_RATE = 0.80;
+	private int count;
+	private Dollar[] arr;
+	
+
+	public HashTable()
 	{
-		Dollar [] arr = new Dollar[29];
-		HashTable table = new HashTable();
-		table.hashArray(arr, new Dollar(2));
-		table.hashArray(arr, new Dollar(15.01));
-		int val1 = table.hashSearch(arr, new Dollar(15.01));
-		int val2 = table.hashSearch(arr, new Dollar(2));
-		 System.out.println(val1);
-		 System.out.println(val2);
+		arr = new Dollar[10];
+		count = 0;
 	}
 	
-	public int hashSearch(Dollar [] arr, Dollar key) throws Exception
+	public HashTable(int size)
 	{
-		int keyIndex = hashFunction(key);
+		arr = new Dollar[size];
+		count = 0;
+	}
+	
+	public int hashSearch (Dollar key) throws Exception
+	{
+		int keyIndex = hashFunction(key,arr.length);
 		int i =0;
 		
 		while(arr[keyIndex]!= null)
@@ -32,32 +37,99 @@ public class HashTable {
 		
 	}
 	
-	public void hashArray(Dollar [] arr, Dollar key)
+	public void hashArray(Dollar key)
 	{
-		int keyIndex = hashFunction(key);
+		int keyIndex = hashFunction(key,arr.length);
+		int val = keyIndex;
 		int i =0;
-		
+		if(getLoadFactor()>MAX_LOAD_RATE)
+		{
+			resize();
+		}
 		while(arr[keyIndex]!= null)
 		{
+			keyIndex = val;
 			keyIndex = (keyIndex + i +i*i)%arr.length;
 			i++;
 		}
 		
 		arr[keyIndex] = key;
+		count++;
 	}
 	
+	public double getLoadFactor()
+	{
+		double loadFactor = (double)count/(double)arr.length;
+		return loadFactor;
+	}
 	
-	public int hashFunction(Dollar key)
+	public int hashFunction(Dollar key, int size)
 	{
 		int w = key.getCurrNoteVal();
 		int f = key.getCurrCoinVal();
 		int m = 2;
 		int n = 3;
-		int size = 29;
 		
 		int index = (m*w +  n*f) % size;
 		
 		return index;
+	}
+	
+	public void resize()
+	{
+		count =0;
+		Dollar [] temp = arr;
+		arr = new Dollar[nextPrime(arr.length *2)];
+		
+		for(Dollar val : temp)
+		{
+			if(val!= null)
+			{
+				hashArray(val);
+			}
+		}
+			
+	}
+	
+	
+	private int nextPrime(int val)
+	{
+		val+=1;
+		while(!isPrime(val))
+		{
+			val++;
+		}
+		return val;
+		
+	}
+	
+	private boolean isPrime(int val)
+	{
+		if(val<=3)
+        {
+            return !(val==1);
+        }
+		if (val % 2 == 0)
+		{
+			return false;
+		}
+        for (int j = 3; j <= Math.sqrt(val)+1; j+=2)
+        {
+            if (val%j == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+	}
+	
+	//testing method
+	public void print()
+	{
+		for(int i =0; i<arr.length;i++)
+		{
+			System.out.println(i+" :"+ arr[i]);
+		}
 	}
 	
 	
