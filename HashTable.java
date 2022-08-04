@@ -2,7 +2,7 @@
  * Lab 05
  * @author Lab Group 7: Meghana Indukuri & Joseph Khamisy
  * This program implements a hash table which hashes dollar values into an array and can search for them.
- * July 6th 2022
+ * Aug 4th 2022
  */
 public class HashTable {
 
