@@ -92,7 +92,7 @@ public class HashTable {
 		int copy = valIndex;
 		int i =1;
 		
-		boolean cyclic = false; // flag for if quadratic probing has entered a loop.
+		boolean cyclic = false; // flag for if quadratic probing has entered a cyclic hash.
 		while(arr[valIndex]!= null)
 		{
 			if(arr[valIndex].isEqual(value))
@@ -147,7 +147,7 @@ public class HashTable {
 		int copy = valIndex;
 		int i =1;
 	
-		boolean cyclic = false; // flag for if quadratic probing has entered a loop.
+		boolean cyclic = false; // flag for if quadratic probing has entered a cyclic hash.
 		while(arr[valIndex]!= null)
 		{
 			if(!cyclic)
@@ -288,7 +288,7 @@ public class HashTable {
 	{
 		if(val<=3)
         	{
-           		 return !(val==1);
+           		return !(val==1);
        		}
 		if (val % 2 == 0)
 		{
@@ -297,11 +297,11 @@ public class HashTable {
         	for (int j = 3; j <= Math.sqrt(val)+1; j+=2)
         	{
            	 	if (val%j == 0)
-            		{
-                	return false;
+           	 	{
+               	 		return false;
             		}
-        	}
-       		return true;
+       		 }
+        	return true;
 	}
 	
 }
