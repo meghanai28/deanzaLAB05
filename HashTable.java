@@ -227,9 +227,9 @@ public class HashTable {
 	private boolean isPrime(int val)
 	{
 		if(val<=3)
-        {
-            return !(val==1);
-        }
+        	{
+            		return !(val==1);
+       		}
 		if (val % 2 == 0)
 		{
 			return false;
