@@ -1,5 +1,5 @@
 /**
- * Lab 07
+ * Lab 05
  * @author Lab Group 7: Meghana Indukuri & Joseph Khamisy
  * This program implements a hash table which hashes dollar values into an array and can search for them.
  * July 6th 2022
@@ -80,8 +80,7 @@ public class HashTable {
 			{
 				return valIndex;
 			}
-			valIndex = copy;
-			valIndex = (valIndex + i +i*i)%arr.length;
+			valIndex = (copy + i +i*i)%arr.length;
 			i++;
 		}
 		
@@ -107,8 +106,7 @@ public class HashTable {
 		}
 		while(arr[valIndex]!= null)
 		{
-			valIndex = copy;
-			valIndex = (valIndex + i +i*i)%arr.length;
+			valIndex = (copy + i +i*i)%arr.length;
 			collisions++;
 			i++;
 		}
@@ -135,7 +133,7 @@ public class HashTable {
 	 * This method finds the index for a given dollar value using the pseudorandom hash scheme 
 	 * - (m*w +  n*f) % size - where size = array size, m = 2, n = 3, w = whole value, f = fractional value.
 	 * This method takes the dollar value to be inserted into the array and returns the index at where
-	 * it should be hashed accoruding to the hashfunction.
+	 * it should be hashed according to the hashfunction.
 	 * @pre key - the dollar value to which the hash function will use to calculate an index.
 	 * 		size - int - the size of the array we want to hash into.
 	 * @post the hashfunction is calculated based on the pseudorandom hash scheme 
@@ -227,31 +225,30 @@ public class HashTable {
 	private boolean isPrime(int val)
 	{
 		if(val<=3)
-        	{
-            		return !(val==1);
-       		}
+        {
+            return !(val==1);
+        }
 		if (val % 2 == 0)
 		{
 			return false;
 		}
-        	for (int j = 3; j <= Math.sqrt(val)+1; j+=2)
-        	{
-            		if (val%j == 0)
-           	 	{
-               	            return false;
-           	 	}
-       	        }
-       	       return true;
+        for (int j = 3; j <= Math.sqrt(val)+1; j+=2)
+        {
+            if (val%j == 0)
+            {
+                return false;
+            }
+        }
+        return true;
 	}
 	
 	//testing method
-	public void print()
-	{
-		for(int i =0; i<arr.length;i++)
+		public void print()
 		{
-			System.out.println(i+" :"+ arr[i]);
+			for(int i =0; i<arr.length;i++)
+			{
+				System.out.println(i+" :"+ arr[i]);
+			}
 		}
-	}
-	
 	
 }
