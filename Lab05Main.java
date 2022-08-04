@@ -4,7 +4,7 @@ import java.util.Scanner;
  * @author Lab Group 7: Meghana Indukuri & Joseph Khamisy
  * This program creates the main, where the hashtable is tested with various operations. This main allows
  * for user interactivity and prints the value to console. 
- * July 29th 2022
+ * Aug 4th 2022
  */
 public class Lab05Main {
 	public static void main(String [] args) throws Exception
