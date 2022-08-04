@@ -24,7 +24,8 @@ public class HashTable {
 	public int hashSearch (Dollar key) throws Exception
 	{
 		int keyIndex = hashFunction(key,arr.length);
-		int i =0;
+		int val = keyIndex;
+		int i =1;
 		
 		while(arr[keyIndex]!= null)
 		{
@@ -32,6 +33,7 @@ public class HashTable {
 			{
 				return keyIndex;
 			}
+			keyIndex = val;
 			keyIndex = (keyIndex + i +i*i)%arr.length;
 			i++;
 		}
