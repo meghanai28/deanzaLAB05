@@ -121,7 +121,7 @@ public class Lab05Main {
 		 			int index = table.hashSearch(search);
 		 			if(index == -1)
 		 			{
-		 				System.out.println(search + " does not exist in this table! It has NOT been found! \n");
+		 				System.out.println(search + " is Invalid Data. Has not been found in our hashtable \n");
 		 			}
 		 			else
 		 			{
