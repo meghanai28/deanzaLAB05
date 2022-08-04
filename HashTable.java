@@ -234,14 +234,14 @@ public class HashTable {
 		{
 			return false;
 		}
-        for (int j = 3; j <= Math.sqrt(val)+1; j+=2)
-        {
-            if (val%j == 0)
-            {
-                return false;
-            }
-        }
-        return true;
+        	for (int j = 3; j <= Math.sqrt(val)+1; j+=2)
+        	{
+            		if (val%j == 0)
+           	 	{
+               	            return false;
+           	 	}
+       	        }
+       	       return true;
 	}
 	
 	//testing method
