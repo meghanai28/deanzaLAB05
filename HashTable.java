@@ -28,9 +28,14 @@ public class HashTable {
 	 * This constructor intializes private attributes array, count, and collisions.
 	 * @pre size - an int that represents the size of the array
 	 * @post array is given a size that is entered as a parameter, count is set to 0, and collisions is set to 0.
+	 * 		if size is set to 0, illegal argument exception is thrown. 
 	 */
 	public HashTable(int size)
 	{
+		if(size == 0)
+		{
+			throw new IllegalArgumentException();
+		}
 		arr = new Dollar[size];
 		count = 0;
 		collisions = 0;
@@ -63,24 +68,49 @@ public class HashTable {
 	 * the hash function and quadratic probing(i+i*i). The method
 	 * returns the index at which the given dollar value has been found
 	 * if it has not been found it returns -1.
+	 * 
 	 * @pre value - the dollar value to be searched for.
+	 * 
 	 * @post the quadratic probing we use for collisions is (i+i*i). 
+	 * 
 	 * @return int - the index of where the dollar value was found. if not found
 	 * 			-1 is returned as  the index.
+	 * 		the quadratic probing we use for collisons is 
+	 * 		(i+i*i).
+	 * 		Whenever we do quadratic probing, we check if the new index is equal to the starting
+	 * 		position which tells us we have entered a cyclic hash.
+	 * 		Then we default to linear probing whenever we enter a cyclic hash. 
+	 * 		if value == null exception is thrown.
 	 */
 	public int hashSearch (Dollar value) throws Exception
 	{
+		if(value == null)
+		{
+			throw new IllegalArgumentException();
+		}
 		int valIndex = hashFunction(value,arr.length);
 		int copy = valIndex;
 		int i =1;
 		
+		boolean cyclic = false; // flag for if quadratic probing has entered a loop.
 		while(arr[valIndex]!= null)
 		{
 			if(arr[valIndex].isEqual(value))
 			{
 				return valIndex;
 			}
-			valIndex = (copy + i +i*i)%arr.length;
+			if(!cyclic)
+			{
+				valIndex = (copy + i +i*i)%arr.length;
+			}
+			else
+			{
+				valIndex = (copy + i)%arr.length;
+			}
+			if(valIndex == copy)
+			{
+				cyclic = true;
+			}
 			i++;
 		}
 		
@@ -92,21 +122,46 @@ public class HashTable {
 	 * This method hashes a given value into the array using the hash
 	 * function and quadratic probing(i+i*i) for collisions. This method
 	 * also calls the resize method if the loadfactor has passed the treshold.
+	 * 
 	 * @pre value - the dollar value to be inserted into the array.
-	 * @post the quadratic probing we use for collisons is (i+i*i).
+	 * 
+	 * @post the quadratic probing we use for collisons is 
+	 * 		(i+i*i).
+	 * 		Whenever we do quadratic probing, we check if the new index is equal to the starting
+	 * 		position which tells us we have entered a cyclic hash.
+	 * 		Then we default to linear probing whenever we enter a cyclic hash. 
+	 * 		if value == null exception is thrown.
 	 */
 	public void hashArray(Dollar value)
 	{
-		int valIndex = hashFunction(value,arr.length);
-		int copy = valIndex;
-		int i =1;
+		if(value == null)
+		{
+			throw new IllegalArgumentException();
+		}
 		if(getLoadFactor()>MAX_LOAD_RATE)
 		{
 			resize();
 		}
+		
+		int valIndex = hashFunction(value,arr.length);
+		int copy = valIndex;
+		int i =1;
+	
+		boolean cyclic = false; // flag for if quadratic probing has entered a loop.
 		while(arr[valIndex]!= null)
 		{
-			valIndex = (copy + i +i*i)%arr.length;
+			if(!cyclic)
+			{
+				valIndex = (copy + i +i*i)%arr.length;
+			}
+			else
+			{
+				valIndex = (copy + i)%arr.length;
+			}
+			if(valIndex == copy)
+			{
+				cyclic = true;
+			}
 			collisions++;
 			i++;
 		}
@@ -118,8 +173,11 @@ public class HashTable {
 	/**
 	 * This method returns the loadfactor for the hash array, using the count
 	 * of elements, and the array's length.
+	 * 
 	 * @pre
+	 * 
 	 * @post calculates the load factor by count/arr.length
+	 * 
 	 * @return a double which contains the loadfactor
 	 */
 	public double getLoadFactor()
@@ -134,10 +192,14 @@ public class HashTable {
 	 * - (m*w +  n*f) % size - where size = array size, m = 2, n = 3, w = whole value, f = fractional value.
 	 * This method takes the dollar value to be inserted into the array and returns the index at where
 	 * it should be hashed according to the hashfunction.
+	 * 
 	 * @pre key - the dollar value to which the hash function will use to calculate an index.
 	 * 		size - int - the size of the array we want to hash into.
-	 * @post the hashfunction is calculated based on the pseudorandom hash scheme 
+	 * 
+	 * @post the hashfunction is calculated based on the 
+	 * pseudorandom hash scheme :
 	 * - (m*w +  n*f) % size - where size = array size, m = 2, n = 3, w = whole value, f = fractional value.
+	 * 
 	 * @return an int which represnts the index where the dollar key should be inserted. 
 	 */
 	public int hashFunction(Dollar key,int size)
@@ -225,30 +287,21 @@ public class HashTable {
 	private boolean isPrime(int val)
 	{
 		if(val<=3)
-        {
-            return !(val==1);
-        }
+        	{
+           		 return !(val==1);
+       		}
 		if (val % 2 == 0)
 		{
 			return false;
 		}
-        for (int j = 3; j <= Math.sqrt(val)+1; j+=2)
-        {
-            if (val%j == 0)
-            {
-                return false;
-            }
-        }
-        return true;
+        	for (int j = 3; j <= Math.sqrt(val)+1; j+=2)
+        	{
+           	 	if (val%j == 0)
+            		{
+                	return false;
+            		}
+        	}
+       		return true;
 	}
-	
-	//testing method
-		public void print()
-		{
-			for(int i =0; i<arr.length;i++)
-			{
-				System.out.println(i+" :"+ arr[i]);
-			}
-		}
 	
 }
