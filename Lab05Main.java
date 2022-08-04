@@ -26,7 +26,7 @@ public class Lab05Main {
 		System.out.println(table.getCount() + "\n");
 		
 		System.out.println("Here is the load factor the current HashTable:");
-		System.out.println(table.getLoadFactor()+ "\n");
+		System.out.printf(table.getLoadFactor()+ " \n");
 		
 		System.out.println("Here is the number of collisions that have occured when we loaded dollars into the HashTable:");
 		System.out.println(table.getCollisions()+ "\n");
@@ -38,7 +38,7 @@ public class Lab05Main {
 		
 		while(true)
 		{
-			System.out.println("\n\nHere is a menu of operations you the user can do on our Hash Tavle: \n"
+			System.out.println("\n\nHere is a menu of operations you the user can do on our Hash Table: \n"
 					+ "i: enter i to insert an dollar object into the HashTable\n"
 					+ "s: enter s to search for a dollar value in the HashTable and get the index of the dollar if it exists\n"
 					+ "q: enter q to exit the program.\n");
