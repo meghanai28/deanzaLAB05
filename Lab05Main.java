@@ -25,8 +25,9 @@ public class Lab05Main {
 		System.out.println("Here is the number of dollars we have loaded into the HashTable currently:");
 		System.out.println(table.getCount() + "\n");
 		
-		System.out.println("Here is the load factor the current HashTable:");
-		System.out.printf(table.getLoadFactor()+ " \n");
+		System.out.println("Here is the load factor the current HashTable: (rounded 3 decimals)");
+		System.out.format("%.3f", table.getLoadFactor());
+		System.out.println("\n");
 		
 		System.out.println("Here is the number of collisions that have occured when we loaded dollars into the HashTable:");
 		System.out.println(table.getCollisions()+ "\n");
@@ -138,8 +139,9 @@ public class Lab05Main {
 				 System.out.println("Here is the number of dollars we have loaded into the HashTable currently:");
 					System.out.println(table.getCount() + "\n");
 					
-					System.out.println("Here is the load factor the current HashTable:");
-					System.out.println(table.getLoadFactor()+ "\n");
+					System.out.println("Here is the load factor the current HashTable: (rounded 3 decimals)");
+					System.out.format("%.3f", table.getLoadFactor());
+					System.out.println("\n");
 					
 					System.out.println("Here is the number of collisions that have occured when we loaded dollars into the HashTable:");
 					System.out.println(table.getCollisions()+ "\n");
